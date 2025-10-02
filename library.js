@@ -87,5 +87,29 @@ function removeBook(event) {
   displayBooks();
 }
 
-addSampleBooks();
-displayBooks();
+//Adds event listener to the form to add books
+function addAddBookListener() {
+  const form = document.getElementById("book-form");
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault(); // prevent page reload
+
+    const title = document.getElementById("title").value;
+    const author = document.getElementById("author").value;
+    const pages = parseInt(document.getElementById("pages").value);
+    const read = document.getElementById("read").checked;
+
+    addBookToLibrary(title, author, pages, read);
+    displayBooks();
+
+    form.reset();
+  });
+}
+
+function start() {
+  addSampleBooks();
+  displayBooks();
+  addAddBookListener();
+}
+
+start();
