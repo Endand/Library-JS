@@ -35,7 +35,7 @@ function displayBooks() {
   for (const book of myLibrary) {
     // Create card div
     const bookCard = document.createElement("div");
-    bookCard.id = book.id;
+    bookCard.setAttribute("data-id", book.id);
     bookCard.className = "book-card";
 
     // Add book info
@@ -64,9 +64,27 @@ function displayBooks() {
     });
     bookCard.appendChild(readToggleButton);
 
+    //Append remove  button
+    const removeButton = document.createElement("button");
+    removeButton.textContent = "Remove Entry";
+    removeButton.addEventListener("click", (e) => {
+      removeBook(e);
+    });
+    bookCard.appendChild(removeButton);
+
     // Append card to container
     container.appendChild(bookCard);
   }
+}
+
+function removeBook(event) {
+  //remove book from array
+  const card = event.target.parentElement;
+  const bookId = card.getAttribute("data-id");
+  const index = myLibrary.findIndex((book) => book.id === bookId);
+  myLibrary.splice(index, 1);
+
+  displayBooks();
 }
 
 addSampleBooks();
