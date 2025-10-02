@@ -55,6 +55,15 @@ function displayBooks() {
     readStatus.textContent = `Status: ${book.read ? "Read" : "Not read yet"}`;
     bookCard.appendChild(readStatus);
 
+    //Append read toggle button
+    const readToggleButton = document.createElement("button");
+    readToggleButton.textContent = "Toggle Read";
+    readToggleButton.addEventListener("click", () => {
+      book.read = !book.read;
+      displayBooks();
+    });
+    bookCard.appendChild(readToggleButton);
+
     // Append card to container
     container.appendChild(bookCard);
   }
