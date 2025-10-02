@@ -19,3 +19,46 @@ function addBookToLibrary(title, author, pages, read) {
   const newBook = new Book(title, author, pages, read);
   myLibrary.push(newBook);
 }
+
+//for testing
+function addSampleBooks() {
+  addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, false);
+  addBookToLibrary("1984", "George Orwell", 328, true);
+  addBookToLibrary("To Kill a Mockingbird", "Harper Lee", 281, false);
+  addBookToLibrary("The Great Gatsby", "F. Scott Fitzgerald", 180, true);
+}
+
+function displayBooks() {
+  const container = document.getElementById("library-container");
+  container.innerHTML = ""; // Clear previous content
+
+  for (const book of myLibrary) {
+    // Create card div
+    const bookCard = document.createElement("div");
+    bookCard.id = book.id;
+    bookCard.className = "book-card";
+
+    // Add book info
+    const title = document.createElement("h3");
+    title.textContent = book.title;
+    bookCard.appendChild(title);
+
+    const author = document.createElement("p");
+    author.textContent = `Author: ${book.author}`;
+    bookCard.appendChild(author);
+
+    const pages = document.createElement("p");
+    pages.textContent = `Pages: ${book.pages}`;
+    bookCard.appendChild(pages);
+
+    const readStatus = document.createElement("p");
+    readStatus.textContent = `Status: ${book.read ? "Read" : "Not read yet"}`;
+    bookCard.appendChild(readStatus);
+
+    // Append card to container
+    container.appendChild(bookCard);
+  }
+}
+
+addSampleBooks();
+displayBooks();
